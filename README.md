@@ -1,5 +1,5 @@
 # How-to-disable-your-unsupported-GPU-for-MacOS
-So you got your shiny new RTX  2080ti BLOWYMATRON edition but you've probably noticed there's currently no support for your GPU in MacOS Mojave. Well for those who are running unsupported AMD or NVidia GPUs there is still some hope for you with options to spare!
+So you got your shiny new RTX  2080ti BLOWYMATRON edition but you've probably noticed there's currently no support for your GPU in MacOS Mojave. Well for those who are running Maxwell, Pascal or Truing GPUs there is still some hope for you with options to spare!
 
 # Prerequisite
 
@@ -17,7 +17,7 @@ So for your BIOS, make sure to have the following enabled:
 
 And make sure to have your displays connected to the motherboards display outs
 
-# Option 1: Using WhateverGreen's Boot Flags 
+# Option 1: Using WhateverGreen's Boot Flags
 
 So this is probably the easiest of them all for users on here, all you need to do is add the following flag:
 
@@ -31,8 +31,9 @@ This is going to be the most popular for users on here as you can disable your N
 
 So to start, you'll need to open up your config.plist and navigate towards Devices -> Add Properties
 
+&#x200B;
 
-|Devices|Key|Value|Disabled|Value Type |
+|Devices|Key|Value|Disabled|Value Type|
 |:-|:-|:-|:-|:-|
 |NVidia|name|23646973706C6179||DATA|
 |NVidia|IOName|\#display||STRING|
@@ -84,6 +85,87 @@ And now all Nvidia GPUs will be blocked from your system
 
 For most this is considered the hardest as this requires the most amount of work, we'll be using [Rehabman's SSDT patching](https://www.tonymacx86.com/threads/fix-window-server-service-only-ran-for-0-seconds-with-dual-gpu.233092/) to accomplish our Spoofing. The benefit of this method is that you can use a Kepler GPU with your system without any issues as we'll be blocking a device on the PCIe level
 
-To start, we'll need to get a DSDT/SSDT dump with Clover. To do this, press F4 at the Clover boot screen(unfortunately there's no feedback if this was successful). 
+To start, you'll need the following:
 
-Next, open your EFI and go within EFI/CLOVER/ACPI/origin where you'll find a bunch of .aml files. 
+* An SSDT/DSDT dump(done by pressing F4 at Clover boot screen)
+* [AISL Compiler](https://bitbucket.org/RehabMan/acpica/downloads/)
+* [MaciASL](https://sourceforge.net/projects/maciasl/)
+
+If you open your EFI and go within EFI/CLOVER/ACPI/origin, you'll find a bunch of .aml files. These are the files we'll be playing with so grab them and put them in a folder somewhere on your hack
+
+Now you'll want to grab an AISL Complier to analyze these files, you can grab Rehabman's Compiler [here](https://bitbucket.org/RehabMan/acpica/downloads/). 
+
+Within finder, press Command+Shift+G, enter /usr/bin and paste the IASL file here(you will need to authenticate)
+
+Now in terminal, running the following command will disassemble our .aml files:
+
+    cd "to directory where you placed all SSDT/DSDT"
+    iasl -da -dl DSDT.aml SSDT*.aml
+
+Mine looks like this:
+
+    cd /Users/mykolagrymalyuk/Desktop/origin HD/EFI/CLOVER/ACPI/origin
+    iasl -da -dl DSDT.aml SSDT*.aml
+
+Now you'll find a bunch of .dsl files in that folder as well
+
+Next lets try and find \_OFF, this is what is needed for disabling your GPU
+
+    cd "to directory where you placed all SSDT/DSDT"
+    grep -l Method.*_OFF *.dsl
+
+Terminal should return a list of SSDT's with \_OFF within them
+
+Example:
+
+    SSDT-2-PegSsdt.dsl
+    SSDT-3-Ther_Rvp.dsl
+
+We can also check where the \_INI files are, these files are likely going to have some that match with \_OFF which are likely the files we want
+
+    cd /Users/mykolagrymalyuk/Desktop/origin HD/EFI/CLOVER/ACPI/origin
+    grep -l Method.*_INI *.dsl
+
+Terminal should return a list of SSDT's with \_INI within them
+
+Example:
+
+    SSDT-2-PegSsdt.dsl
+
+You'll need to open both of these files and examine, we want the file that corresponds to your GPU. My GPU was found under SSDT-2 but this isn't the same for everyone, you'll need to check whether the \_OFF method is within a PowerShell macro or by itself(We want it by itself)
+
+My GPU was found here:
+
+    \_SB.PCI0.PEG0.PEGP
+
+Now we can create our SSDT! 
+
+Let's open MaciASL, create a file, paste the text below and replace the device path with the one you have:
+
+    DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
+    {
+        Method(_SB.PCI0.RP05.PEGP._DSM, 4)
+        {
+            If (!Arg2) { Return (Buffer() { 0x03 } ) }
+            Return (Package()
+            {
+                "name", Buffer() { "#display" },
+                "IOName", "#display",
+                "class-code", Buffer() { 0xFF, 0xFF, 0xFF, 0xFF },
+                "vendor-id", Buffer() { 0xFF, 0xFF, 0,  0 },
+                "device-id", Buffer() { 0xFF, 0xFF, 0, 0 },
+            })
+        }
+    }
+
+Now save your file as a ACPI Machine Language Binary and place it in EFI/Clover/ACPI/patched/SSDT-DiscreteSpoof.aml
+
+(Don't forget to specify it in your Config.plist)
+
+&#x200B;
+
+Had to have gotten my info from somewhere;)
+
+* ["Window Server Service only ran for 0 seconds" with dual-GPU](https://www.tonymacx86.com/threads/fix-window-server-service-only-ran-for-0-seconds-with-dual-gpu.233092/)
+* [Disabling discrete graphics in dual-GPU laptops](https://www.tonymacx86.com/threads/guide-disabling-discrete-graphics-in-dual-gpu-laptops.163772/)
+* [Patching LAPTOP DSDT/SSDTs](https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/)
