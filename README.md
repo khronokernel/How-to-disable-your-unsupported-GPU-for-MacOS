@@ -1,0 +1,1 @@
+# How-to-disable-your-unsupported-GPU-for-MacOS
