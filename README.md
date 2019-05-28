@@ -1,4 +1,4 @@
-# How to disable your unsupported GPU for MacOS
+# How to disable your unsupported Nvidia GPU for MacOS
 So you got your shiny new RTX  2080ti BLOWYMATRON edition but you've probably noticed there's currently no support for your GPU in MacOS Mojave. Well for those who are running Maxwell, Pascal or Truing GPUs there is still some hope for you with options to spare!
 
 # Prerequisite
