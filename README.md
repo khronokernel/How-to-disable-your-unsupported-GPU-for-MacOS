@@ -101,12 +101,7 @@ Now in terminal, running the following command will disassemble our .aml files:
 
     cd "to directory where you placed all SSDT/DSDT"
     iasl -da -dl DSDT.aml SSDT*.aml
-
-Mine looks like this:
-
-    cd /Users/mykolagrymalyuk/Desktop/origin HD/EFI/CLOVER/ACPI/origin
-    iasl -da -dl DSDT.aml SSDT*.aml
-
+    
 Now you'll find a bunch of .dsl files in that folder as well
 
 Next lets try and find \_OFF, this is what is needed for disabling your GPU
