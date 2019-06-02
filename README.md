@@ -25,13 +25,11 @@ So this is probably the easiest of them all for users on here, all you need to d
 
 Now all GPUs besides the iGPU will be disabled, this isn't guaranteed to always work and has the consequence of not allowing other discrete GPUs to be used instead
 
-# Option 2: Blocking All Nvidia GPUs from MacOS
+# Option 2: Blocking all discrete GPUs from MacOS
 
 This is going to be the most popular for users on here as you can disable your Nvidia card but still get to use supported AMD GPU for heavy lifting in MacOS. Main downsides of this method is that it will disable your Kepler GPU as well so you can't run an RTX 2080ti with your GT 710.
 
-So to start, you'll need to open up your config.plist and navigate towards Devices -> Add Properties
-
-&#x200B;
+So to start, you'll need to open up your config.plist and navigate towards Devices -> Add Properties where you'll add the following:
 
 |Devices|Key|Value|Disabled|Value Type|
 |:-|:-|:-|:-|:-|
@@ -81,6 +79,84 @@ And here's the XML for those who prefer Copy-paste:
 
 And now all Nvidia GPUs will be blocked from your system
 
+&#x200B;
+
+And for those with Navi or other unsupported AMD GPUs, there's also some luck for you as well
+
+&#x200B;
+
+|Devices|Key|Value|Disabled|Value Type|
+|:-|:-|:-|:-|:-|
+|ATI|name|23646973706C6179||DATA|
+|ATI|IOName|\#display||STRING|
+|ATI|class-code|FFFFFFFF||DATA|
+|ATI|vendor-id|FFFF0000||DATA|
+|ATI|device-id|FFFF0000||DATA|
+
+And that XML Goodness:
+
+                        <key>AddProperties</key>
+                        <array>
+    			<dict>
+    				<key>Device</key>
+    				<string>ATI</string>
+    				<key>Disabled</key>
+    				<false/>
+    				<key>Key</key>
+    				<string>name</string>
+    				<key>Value</key>
+    				<data>
+    				I2Rpc3BsYXkA
+    				</data>
+    			</dict>
+    			<dict>
+    				<key>Device</key>
+    				<string>ATI</string>
+    				<key>Disabled</key>
+    				<false/>
+    				<key>Key</key>
+    				<string>IOName</string>
+    				<key>Value</key>
+    				<string>#display</string>
+    			</dict>
+    			<dict>
+    				<key>Device</key>
+    				<string>ATI</string>
+    				<key>Disabled</key>
+    				<false/>
+    				<key>Key</key>
+    				<string>class-code</string>
+    				<key>Value</key>
+    				<data>
+    				/////w==
+    				</data>
+    			</dict>
+    			<dict>
+    				<key>Device</key>
+    				<string>ATI</string>
+    				<key>Disabled</key>
+    				<false/>
+    				<key>Key</key>
+    				<string>vendor-id</string>
+    				<key>Value</key>
+    				<data>
+    				//8AAA==
+    				</data>
+    			</dict>
+    			<dict>
+    				<key>Device</key>
+    				<string>ATI</string>
+    				<key>Disabled</key>
+    				<false/>
+    				<key>Key</key>
+    				<string>device-id</string>
+    				<key>Value</key>
+    				<data>
+    				//8AAA==
+    				</data>
+    			</dict>
+                        </array>
+
 # Option 3: Patching with an SSDT
 
 For most this is considered the hardest as this requires the most amount of work, we'll be using [Rehabman's SSDT patching](https://www.tonymacx86.com/threads/fix-window-server-service-only-ran-for-0-seconds-with-dual-gpu.233092/) to accomplish our Spoofing. The benefit of this method is that you can use a Kepler GPU with your system without any issues as we'll be blocking a device on the PCIe level
@@ -93,7 +169,7 @@ To start, you'll need the following:
 
 If you open your EFI and go within EFI/CLOVER/ACPI/origin, you'll find a bunch of .aml files. These are the files we'll be playing with so grab them and put them in a folder somewhere on your hack
 
-Now you'll want to grab an AISL Complier to analyze these files, you can grab Rehabman's Compiler [here](https://bitbucket.org/RehabMan/acpica/downloads/). 
+Now you'll want to grab an AISL Complier to analyze these files, you can grab Rehabman's Compiler [here](https://bitbucket.org/RehabMan/acpica/downloads/).
 
 Within finder, press Command+Shift+G, enter /usr/bin and paste the IASL file here(you will need to authenticate)
 
@@ -101,7 +177,7 @@ Now in terminal, running the following command will disassemble our .aml files:
 
     cd "to directory where you placed all SSDT/DSDT"
     iasl -da -dl DSDT.aml SSDT*.aml
-    
+
 Now you'll find a bunch of .dsl files in that folder as well
 
 Next lets try and find \_OFF, this is what is needed for disabling your GPU
@@ -118,7 +194,7 @@ Example:
 
 We can also check where the \_INI files are, these files are likely going to have some that match with \_OFF which are likely the files we want
 
-    cd /Users/mykolagrymalyuk/Desktop/origin HD/EFI/CLOVER/ACPI/origin
+    cd "to directory where you placed all SSDT/DSDT"
     grep -l Method.*_INI *.dsl
 
 Terminal should return a list of SSDT's with \_INI within them
@@ -133,7 +209,13 @@ My GPU was found here:
 
     \_SB.PCI0.PEG0.PEGP
 
-Now we can create our SSDT! 
+And for those having issues finding the device path, you can also find it in windows by following the ACPI path in device Manager.
+
+>Properties->Details of the Nvidia device, scroll through the properties until you find "BIOS name"  
+>  
+>\- Rehabman
+
+Now we can create our SSDT!
 
 Let's open MaciASL, create a file, paste the text below and replace the device path with the one you have:
 
@@ -164,3 +246,4 @@ Had to have gotten my info from somewhere;)
 * ["Window Server Service only ran for 0 seconds" with dual-GPU](https://www.tonymacx86.com/threads/fix-window-server-service-only-ran-for-0-seconds-with-dual-gpu.233092/)
 * [Disabling discrete graphics in dual-GPU laptops](https://www.tonymacx86.com/threads/guide-disabling-discrete-graphics-in-dual-gpu-laptops.163772/)
 * [Patching LAPTOP DSDT/SSDTs](https://www.tonymacx86.com/threads/guide-patching-laptop-dsdt-ssdts.152573/)
+* [Device location in Windows](https://www.tonymacx86.com/threads/fix-window-server-service-only-ran-for-0-seconds-with-dual-gpu.233092/page-2#post-1592455)
