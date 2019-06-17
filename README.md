@@ -1,6 +1,8 @@
 # How to disable your unsupported GPU for macOS
 So you got your shiny new RTX  2080ti BLOWYMATRON edition but you've probably noticed there's currently no support for your GPU in MacOS Mojave. Well for those who are running Maxwell, Pascal or Turing GPUs there is still some hope for you with options to spare!
 
+This is an information thread, for discussion please visit the r/hackintosh thread: [How to disable your unsupported GPU for macOS](https://www.reddit.com/r/hackintosh/comments/bu1wf8/how_to_disable_your_unsupported_gpu_for_macos/)
+
 # Prerequisite
 
 * A Hackintosh built off the [Vanilla guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)(This is a must as you need to have a clean system for this to work properly)
