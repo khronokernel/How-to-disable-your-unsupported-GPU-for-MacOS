@@ -6,7 +6,7 @@ This is an information thread, for discussion please visit the r/hackintosh thre
 # Prerequisite
 
 * A Hackintosh built off the [Vanilla guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)(This is a must as you need to have a clean system for this to work properly)
-* A GPU that is support in Mojave(generally this will be an iGPU for most users here, check the [Mojave GPU buyers Guide](https://www.reddit.com/r/hackintosh/comments/b91vf5/mojave_gpu_buyers_guide/) to see if your GPU is supported. Keep in mind that using a Kepler GPU with Maxwell, Pascal or Turing GPUs can cause issues)
+* A GPU that is support in Mojave/Catalina(generally this will be an iGPU for most users here, check the [Catalina GPU buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) to see if your GPU is supported. Keep in mind that using a Kepler GPU with Maxwell, Pascal or Turing GPUs can cause issues)
 * Up to date [Lilu.kext](https://github.com/vit9696/Lilu/releases) and [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen/releases)
 * A Plist editor: Clover configurator works fine
 
