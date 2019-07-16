@@ -74,7 +74,7 @@ Let's open MaciASL, create a file, paste the text below and replace the device p
 ```text
 DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
 {
-    Method(_SB.PCI0.RP05.PEGP._DSM, 4)
+    Method(_SB.PCI0.PEG0.PEGP._DSM, 4)
     {
         If (!Arg2) { Return (Buffer() { 0x03 } ) }
         Return (Package()
