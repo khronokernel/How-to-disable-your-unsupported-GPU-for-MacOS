@@ -22,3 +22,25 @@ So for your BIOS, make sure to have the following enabled:
 
 And make sure to have your displays connected to the motherboards display outs
 
+## Which Options should I choose?
+
+Option 1:
+
+* Disables all GPUs that aren't the iGPU
+* Quick and easy with little work, avoid when possible as it doesn't always work
+
+Option 2:
+
+* Disables all GPUs from one brand(ie: all Nvidia GPUs)
+
+Option 3:
+
+* Disables a GPU on per slot basis
+* Recommended for those who run Kepler GPUs with Maxwell, Pascal or Turing
+
+Option 4:
+
+* Disables a GPU on per slot basis
+* Recommended for those who run Kepler GPUs with Maxwell, Pascal or Turing
+
+* Disables a GPU on per slot basis
