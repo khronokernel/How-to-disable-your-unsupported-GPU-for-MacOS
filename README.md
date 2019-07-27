@@ -42,5 +42,3 @@ Option 4:
 
 * Disables a GPU on per slot basis
 * Recommended for those who run Kepler GPUs with Maxwell, Pascal or Turing
-
-* Disables a GPU on per slot basis
