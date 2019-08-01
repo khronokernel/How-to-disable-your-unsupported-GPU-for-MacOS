@@ -71,6 +71,27 @@ Now we can create our SSDT!
 
 Let's open MaciASL, create a file, paste the text below and replace the device path with the one you have:
 
+
+For Nvidia Users:
+
+```text
+DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
+{
+    Method(_SB.PCI0.PEG0.PEGP._DSM, 4)
+    {
+        If (!Arg2) { Return (Buffer() { 0x03 } ) }
+        Return (Package()
+        {
+            "name", Buffer() { "#display" },
+            "IOName", "#display",
+            "class-code", Buffer() { 0xFF, 0xFF, 0xFF, 0xFF },
+        })
+    }
+}
+```
+
+For AMD users:
+
 ```text
 DefinitionBlock ("", "SSDT", 2, "hack", "spoof", 0)
 {
