@@ -22,11 +22,24 @@ With this, we can start the real work.
 
 Under `Devices -> Properties -> Devices`, we can add our PCI route with the following properties:
 
+
+Nvidia users:
+
 |Properties Key\*|Properties Value|Value Type|
 |:-|:-|:-|
 |name|23646973706C6179|data|
 |IONAME|\#display|string|
 |class-code|FFFFFFFF|data|
+
+AMD users:
+
+|Properties Key\*|Properties Value|Value Type|
+|:-|:-|:-|
+|name|23646973706C6179|data|
+|IONAME|\#display|string|
+|class-code|FFFFFFFF|data|
+|vendor-id|FFFF0000|data|
+|device-id|FFFF0000|data|
 
 
 and that XML goodness:
