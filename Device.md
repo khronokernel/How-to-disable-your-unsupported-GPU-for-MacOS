@@ -1,4 +1,4 @@
-Options 3 and 4 are quite similar, they both disable a very specifc GPU allowing you to use other GPUs togehter with is like a GT 710 with a GTX 2080Ti. How the DevicePropertes patch differ from an SSDT is that it's easier to find the GPU's device path for a GPU from macOS.
+Options 3 and 4 are quite similar, they both disable a very specific GPU allowing you to use other GPUs of the same brand together like a GT 710 with a GTX 2080Ti. How the DevicePropertes patch differs from an SSDT is that it's easier to find the GPU's device path for a GPU from macOS.
 
 To start, you'll need the following:
 
@@ -63,3 +63,5 @@ and that XML goodness:
 ```
 
 ![](https://i.imgur.com/kErJi0g.png)
+
+And voila! Your unsupported GPU is now hidden, do keep in mind other devices that go into that PCIe slot will also gain these properties disbaling them(*I may or may not have disabled my PCIe drives this way*)
