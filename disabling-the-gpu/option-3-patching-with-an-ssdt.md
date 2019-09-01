@@ -64,13 +64,13 @@ My GPU was found here:
 
 And for those having issues finding the device path, you can also find it in windows by following the ACPI path in device Manager.
 
-> Properties-&gt;Details of the Nvidia device, scroll through the properties until you find "BIOS name"  
-> - Rehabman
+> Properties-&gt;Details of the Nvidia device, scroll through the properties until you find "BIOS name"
+>
+> * Rehabman
 
 Now we can create our SSDT!
 
 Let's open MaciASL, create a file, paste the text below and replace the device path with the one you have:
-
 
 For Nvidia Users:
 

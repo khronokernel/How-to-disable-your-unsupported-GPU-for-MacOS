@@ -31,7 +31,7 @@ Option 1:
 
 Option 2:
 
-* Disables all GPUs from one brand(ie: all Nvidia GPUs)
+* Disables all GPUs from one brand\(ie: all Nvidia GPUs\)
 
 Option 3:
 
@@ -42,3 +42,4 @@ Option 4:
 
 * Disables a GPU on per slot basis
 * Recommended for those who run Kepler GPUs with Maxwell, Pascal or Turing
+
