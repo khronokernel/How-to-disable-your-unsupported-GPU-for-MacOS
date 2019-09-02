@@ -15,7 +15,7 @@ This is an information thread, for discussion please visit the r/hackintosh thre
 
 ## BIOS Settings
 
-So for your BIOS, make sure to have the following enabled:
+For those planning on using an iGPU, make sure to have the following enabled in your BIOS:
 
 * iGPU Multi-Monitor: Enabled
 * Primary Display: Enabled
