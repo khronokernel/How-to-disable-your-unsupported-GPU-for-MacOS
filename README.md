@@ -9,7 +9,7 @@ This is an information thread, for discussion please visit the r/hackintosh thre
 ## Prerequisite
 
 * A Hackintosh built off the [Vanilla guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/)\(This is a must as you need to have a clean system for this to work properly\)
-* A GPU that is support in Mojave/Catalina\(generally this will be an iGPU for most users here, check the [Catalina GPU buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) to see if your GPU is supported. Keep in mind that using a Kepler GPU with Maxwell, Pascal or Turing GPUs requires more work\)
+* A GPU that is support in Mojave/Catalina\(generally this will be an iGPU for most users here, check the [GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) to see if your GPU is supported. Keep in mind that using a Kepler GPU with Maxwell, Pascal or Turing GPUs will require more work\)
 * Up to date [Lilu.kext](https://github.com/vit9696/Lilu/releases) and [WhateverGreen.kext](https://github.com/acidanthera/WhateverGreen/releases)
 * A Plist editor: Clover configurator works fine
 
@@ -21,6 +21,10 @@ So for your BIOS, make sure to have the following enabled:
 * Primary Display: Enabled
 
 And make sure to have your displays connected to the motherboards display outs
+
+## Can I use the iGPU for rendering but the video outs of my dGPU?
+
+Unfortunately not, and the reason being is actually quite similar to how Nvidia's Optimus technology functions. You would first need a way to grab/encode the iGPU's signal, send it towards the discrete GPU, then have said GPU decode the signal and display it. One small problem, decoding the signal would require proper GPU acceleration which your unsupported GPU doesn't have. So you will need to use your motherboard's video out ports no matter what
 
 ## Which Options should I choose?
 
