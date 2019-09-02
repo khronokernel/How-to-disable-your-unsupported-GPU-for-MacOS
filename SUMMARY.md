@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Introduction](README.md)
+* [Setting up the iGPU](igpu.md)
 
 
 ## Disabling the GPU
