@@ -29,7 +29,7 @@ Nvidia users:
 | Properties Key\* | Properties Value | Value Type |
 | :--- | :--- | :--- |
 | name | 23646973706C6179 | data |
-| IONAME | \#display | string |
+| IOName | \#display | string |
 | class-code | FFFFFFFF | data |
 
 AMD users:
@@ -37,7 +37,7 @@ AMD users:
 | Properties Key\* | Properties Value | Value Type |
 | :--- | :--- | :--- |
 | name | 23646973706C6179 | data |
-| IONAME | \#display | string |
+| IOName | \#display | string |
 | class-code | FFFFFFFF | data |
 | vendor-id | FFFF0000 | data |
 | device-id | FFFF0000 | data |
@@ -49,7 +49,7 @@ and that XML goodness:
         <dict>
             <key>PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)</key>
             <dict>
-                <key>IONAME</key>
+                <key>IOName</key>
                 <string>#display</string>
                 <key>class-code</key>
                 <data>
