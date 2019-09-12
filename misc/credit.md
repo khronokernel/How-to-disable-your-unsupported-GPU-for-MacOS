@@ -1,5 +1,6 @@
 # Credit
-
+* [DhinakG](https://github.com/dhinakg)
+   * Correction on IOName
 Sources:
 
 * ["Window Server Service only ran for 0 seconds" with dual-GPU](https://www.tonymacx86.com/threads/fix-window-server-service-only-ran-for-0-seconds-with-dual-gpu.233092/)
