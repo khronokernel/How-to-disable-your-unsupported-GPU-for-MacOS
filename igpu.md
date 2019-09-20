@@ -10,7 +10,7 @@ PciRoot(0x0)/Pci(0x2,0x0)
 ```
 
 
-Now we need to to find a framebuffer approrpiate for our iGPU, you can find a list of these values in the [GPU Buyers Guide](Catalina GPU Buyers Guide) or in the [Intel Framebuffer Patching Guide](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271). For the majority you can find your iGPU here:
+Now we need to to find a framebuffer approrpiate for our iGPU, you can find a list of these values in the [GPU Buyers Guide](https://khronokernel-3.gitbook.io/catalina-gpu-buyers-guide/) or in the [Intel Framebuffer Patching Guide](https://www.insanelymac.com/forum/topic/334899-intel-framebuffer-patching-using-whatevergreen/?tab=comments#comment-2626271). For the majority you can find your iGPU here:
 
 **Ivy Bridge**:
 
@@ -62,5 +62,9 @@ And for those who cannot set their iGPU's memory to 64MB in the BIOS will also n
 |framebuffer-stolenmem|00003001|Data|
 
 ![Clover Configurator](https://i.imgur.com/zoa9YR6.png)
+
+## Having either color or display out issues?
+
+Sometimes macOS won't be able to correctly tell which display out is which so it may apply displayPort properties onto an HDMI port or vise versa. To fix this, you can refer to the [Pink/ Purple Tint section in the r/Hackintosh Vanilla Guide](https://hackintosh.gitbook.io/-r-hackintosh-vanilla-desktop-guide/config.plist-per-hardware/coffee-lake#pink-purple-tint)
 
    
