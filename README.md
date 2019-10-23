@@ -36,14 +36,15 @@ Option 1:
 Option 2:
 
 * Disables all GPUs from one brand\(ie: all Nvidia GPUs\)
+* Only usable for Clover, Opencore users must use either options 1,3 or 4
 
 Option 3:
 
-* Disables a GPU on per slot basis
+* Disables a specific GPU
 * Recommended for those who run Kepler GPUs with Maxwell, Pascal or Turing
 
 Option 4:
 
-* Disables a GPU on per slot basis
+* Disables on a per slot basis
 * Recommended for those who run Kepler GPUs with Maxwell, Pascal or Turing
 
