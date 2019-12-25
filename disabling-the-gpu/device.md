@@ -65,5 +65,5 @@ and that XML goodness:
 
 ![](https://i.imgur.com/kErJi0g.png)
 
-And voila! Your unsupported GPU is now hidden, do keep in mind other devices that go into that PCIe slot will also gain these properties disbaling them\(_I may or may not have disabled my PCIe drives this way_\)
+And voila! Your unsupported GPU is now hidden, do keep in mind other devices that go into that PCIe slot will also gain these properties disabling them\(_I may or may not have disabled my PCIe drives this way_\)
 
