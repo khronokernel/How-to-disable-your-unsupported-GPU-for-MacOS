@@ -48,3 +48,6 @@ Option 4:
 * Disables on a per slot basis
 * Recommended for those who run Kepler GPUs with Maxwell, Pascal or Turing
 
+## OpenCore Users
+
+For those running OpenCore, I highly recommend reading the [Disabling GPU Guide](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/post-install/spoof) found in the OpenCore guide as this has specific OSI fixes for SSDTs 
